@@ -3,30 +3,27 @@ const app=express()
 const bp=require('body-parser')
 const jwt=require('jsonwebtoken')
 const userCredentials=require('./data/credentials')
+const cors=require('cors')
+const authorize=require('./middleware/authorize')
+app.use(cors())
 app.use(bp.json())
 
 app.post('/signin',(req,res)=>{
 const data=req.body
 const result=userCredentials.find((item)=>item.email===data.email)
 if(data.password===result.password){
-    const token=jwt.sign({email:data.email},'jamesbond')
+    const token=jwt.sign({email:data.email},'jamesbond',{expiresIn:'60'})
     res.send({"msg":'authenticated',"status":true,"accesstoken":token})
 }
 else{
     res.send({"msg":' not authenticated',"status":false})
 }
 })
-
-app.post('/delete',(req,res)=>{
-    const inputtoken=req.headers.authorization
-    const token=inputtoken.replace('Bearer ','')
-    try{
-    const result=jwt.verify(token,'jamesbond')
+app.post('/delete',authorize,(req,res)=>{
     res.send({"msg":'deleted successfully'})
-    }
-    catch(e){
-        res.send({"msg":'you are not authorized'})
-    }
+})
+app.post('/update',authorize,(req,res)=>{
+   res.send({"msg":"you are authorized"})
 })
 
 app.listen(3001,()=>console.log('server started at port 3001'))
