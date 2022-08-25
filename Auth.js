@@ -27,7 +27,8 @@ app.post('/login',(req,res)=>{
     if(data.password===result.password){
         const token=jwt.sign({email:data.email},'jamesbond')
         console.log(token)
-        res.status(200).cookie('sometokevalue',token,{httpOnly:true}).send({"msg":'you are authenticated',"status":true})   
+        res.status(200).cookie('sometokevalue',token,{sameSite:'strict',httpOnly:true})
+        res.send({"msg":'you are authenticated',"status":true})   
     }
     else{
         res.send({"msg":' not authenticated',"status":false})
@@ -43,7 +44,7 @@ app.post('/update',authorize,(req,res)=>{
 })
 
 app.post('/seecookie',(req,res)=>{
-    console.log(req.cookies)
+    console.log(req)
 res.send('cookie is seen')
    //res.clearCookies().send("cookie is seen!")
 })
