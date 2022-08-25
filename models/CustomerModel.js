@@ -8,12 +8,5 @@ const contactModel=mongoose.model("ContactsCollection",{
 })
 
 //creating a document
-const user1=new contactModel({
-    Fname:'john',
-    Phone:2938283,
-    Address:"IND"
-})
-
-user1.save().then((Res)=>console.log('created one user')).catch((e)=>console.log(e))
-
+module.exports=contactModel
 
