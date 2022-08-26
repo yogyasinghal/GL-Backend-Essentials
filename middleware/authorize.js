@@ -1,6 +1,7 @@
 const jwt=require('jsonwebtoken')
 function authorize(req,res,next){
-    const inputtoken=req.headers.authorization
+    //const inputtoken=req.headers.authorization
+    const inputtoken=req.cookies.sometokevalue
     const token=inputtoken.replace('Bearer ','')
     try{
     const result=jwt.verify(token,'jamesbond')

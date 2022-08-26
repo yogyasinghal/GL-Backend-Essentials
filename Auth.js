@@ -34,17 +34,16 @@ app.post('/login',(req,res)=>{
         res.send({"msg":' not authenticated',"status":false})
     }
 })
-
 app.post('/delete',authorize,(req,res)=>{
     res.send({"msg":'deleted successfully'})
 })
 app.post('/update',authorize,(req,res)=>{
-
+    console.log(req.cookies)
    res.send({"msg":"you are authorized"})
 })
 
 app.post('/seecookie',(req,res)=>{
-    console.log(req)
+   
 res.send('cookie is seen')
    //res.clearCookies().send("cookie is seen!")
 })
