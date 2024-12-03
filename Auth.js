@@ -22,6 +22,7 @@ else{
 }
 })
 app.post('/login',(req,res)=>{
+    console.log("auth /login",req.body);
     const data=req.body
     const result=userCredentials.find((item)=>item.email===data.email)
     if(data.password===result.password){
@@ -44,7 +45,7 @@ app.post('/update',authorize,(req,res)=>{
 })
 
 app.post('/seecookie',(req,res)=>{
-    console.log(req)
+    console.log("auth /seecokie")
 res.send('cookie is seen')
    //res.clearCookies().send("cookie is seen!")
 })
