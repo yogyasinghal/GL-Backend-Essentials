@@ -2,6 +2,7 @@ const express=require('express')
 const router=express.Router()
 const contactModel=require('../models/CustomerModel')
 router.post('/create',(req,res)=>{
+    console.log("inside createuser post");
     const data=req.body
     const user1=new contactModel({
         Fname:data.fname,

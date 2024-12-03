@@ -71,5 +71,5 @@ app.post('/create',(req,res)=>{
 
 
 
-app.listen(3001,()=>console.log('server has started at port no 3001'))
+app.listen(3001,()=>console.log('app server has started at port no 3001'))
 
