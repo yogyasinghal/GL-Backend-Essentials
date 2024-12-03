@@ -11,10 +11,12 @@ app.use(bp.json())
 app.use(cookieparser())
 
 app.post('/signin',(req,res)=>{
-const data=req.body
+const data=req.body;
+console.log("data auth = ",data);
 const result=userCredentials.find((item)=>item.email===data.email)
 if(data.password===result.password){
     const token=jwt.sign({email:data.email},'jamesbond',{expiresIn:'60'})
+    console.log("token = ",token);
     res.send({"msg":'authenticated',"status":true,"accesstoken":token})
 }
 else{
